@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Log4Net-Mongo</id>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <title>Log4Net-Mongo</title>
     <authors>Simon Proctor</authors>
     <owners>Simon Proctor</owners>
