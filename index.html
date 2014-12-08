@@ -31,18 +31,15 @@
         <h3>
 <a id="mongo-appender-for-log4net" class="anchor" href="#mongo-appender-for-log4net" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mongo Appender for Log4Net</h3>
 
-<p>This project provides a Mongo based buffering appender for Log4net. The code is split up into a two main branche. One is for general Log4Net usage and the other is a Sitecore branch for use in that product. This is because the Sitecore product uses specific versions of the Mongo Driver and Log4Net.</p>
-
-<p>The core code uses Nuget and will also be available as a NuGet package. The Sitecore related code is currently available as code only due to the dependencies. To build the Sitecore related code:</p>
+<p>This project provides a Mongo based buffering appender for Log4net. 
+The core code uses Nuget and will also be available as a NuGet package. To build the bleeding edge code:</p>
 
 <pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
-$ git checkout sitecore-75
+$ git checkout develop
 </code></pre>
 
-<p>Longer term, the Sitecore branches will be replaced with assembly binding instructions and the core product will be available as a standalone Nuget package.</p>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>For use with Sitecore, assembly binding instructions will be provided. </p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/simonproctor">simonproctor</a></p>
