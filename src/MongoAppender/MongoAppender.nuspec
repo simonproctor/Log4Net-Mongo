@@ -9,11 +9,13 @@
     <licenseUrl>https://raw.githubusercontent.com/simonproctor/Log4Net-Mongo/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/simonproctor/Log4Net-Mongo</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>Mongo appender for Log4net</description>
     <tags>log logging log4net debug diagnostic trace db database nosql mongo mongodb appender log4net apache</tags>
 	<dependencies>
-      <dependency id="log4net" version="2.0.3" targetFramework="net40" />
-      <dependency id="mongocsharpdriver" version="1.9.2" targetFramework="net40" />
+      <dependency id="log4net" version="2.0.3"/>
+      <dependency id="mongocsharpdriver" version="1.9.2" />
+	  <dependency id="NUnit" version="2.6.2" />
+	  <dependency id="SharpTestsEx" version="1.1.1" />
     </dependencies>	
   </metadata>
 </package>
