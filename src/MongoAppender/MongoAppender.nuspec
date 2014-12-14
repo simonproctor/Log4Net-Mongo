@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Log4Net-Mongo</id>
+    <version>0.2.1</version>
+    <title>Log4Net-Mongo</title>
+    <authors>Simon Proctor</authors>
+    <owners>Simon Proctor</owners>
+    <licenseUrl>https://raw.githubusercontent.com/simonproctor/Log4Net-Mongo/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/simonproctor/Log4Net-Mongo</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Mongo appender for Log4net</description>
+    <tags>log logging log4net debug diagnostic trace db database nosql mongo mongodb appender log4net apache</tags>
+	<dependencies>
+      <dependency id="log4net" version="2.0.3"/>
+      <dependency id="mongocsharpdriver" version="1.9.2" />
+    </dependencies>	
+  </metadata>
+</package>
