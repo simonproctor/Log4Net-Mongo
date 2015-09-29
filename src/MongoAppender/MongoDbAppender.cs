@@ -49,18 +49,18 @@ namespace MongoAppender
         /// mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
         /// If no database specified, default to "log4net"
         /// </summary>
-        public String ConnectionString { get; set; }
+        public string ConnectionString { get; set; }
 
 		/// <summary>
 		/// Gets or sets the connectionString name to use in the connectionStrings section of the *.config file
 		/// If not specified or connectionString name does not exist will use ConnectionString value
 		/// </summary>
-		public String ConnectionStringName { get; set; }
+		public string ConnectionStringName { get; set; }
 
 		/// <summary>
 		/// Gets or sets the name of the collection in the database. Defaults to "logs"
 		/// </summary>
-		public String CollectionName { get; set; }
+		public string CollectionName { get; set; }
 
         /// <summary>
         /// Gets or sets Mongo collection to write to. Initialised when the appender is activated
@@ -73,7 +73,7 @@ namespace MongoAppender
         /// <param name="field">The field to log</param>
 		public void AddField(MongoAppenderField field)
 		{
-			this.fields.Add(field);
+			fields.Add(field);
 		}
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace MongoAppender
         {
             base.ActivateOptions();
 
-            this.Collection = GetCollection();
+            Collection = GetCollection();
         }
 
         /// <summary>
@@ -143,10 +143,10 @@ namespace MongoAppender
         /// Gets the connection string by name or by using the connection string property if unavailable.
         /// </summary>
         /// <returns>The connection string</returns>
-		protected virtual String GetConnectionString()
+		protected virtual string GetConnectionString()
 		{
 			ConnectionStringSettings connectionStringSetting = ConfigurationManager.ConnectionStrings[ConnectionStringName];
-			return connectionStringSetting != null ? connectionStringSetting.ConnectionString : this.ConnectionString;
+			return connectionStringSetting != null ? connectionStringSetting.ConnectionString : ConnectionString;
 		}
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace MongoAppender
         /// <returns>The Mongo database</returns>
 		protected virtual MongoDatabase GetDatabase()
 		{
-            String connectionString = GetConnectionString();
+            string connectionString = GetConnectionString();
 
 			MongoUrl url = MongoUrl.Create(connectionString);
             MongoClient client = new MongoClient(url);
@@ -175,7 +175,7 @@ namespace MongoAppender
 		{
             BsonDocument doc = new BsonDocument();
 
-            foreach (MongoAppenderField field in this.fields)
+            foreach (MongoAppenderField field in fields)
             {
                 try
                 {

@@ -35,7 +35,7 @@ namespace MongoAppender
         /// <summary>
         /// Gets or sets the name of the log field
         /// </summary>
-		public String Name { get; set; }
+		public string Name { get; set; }
 		
         /// <summary>
         /// Gets or sets the log layout type that will format the final log entry
@@ -45,6 +45,6 @@ namespace MongoAppender
         /// <summary>
         /// Gets or sets the log format value
         /// </summary>
-        public String Value { get; set; }
+        public string Value { get; set; }
 	}
 }
