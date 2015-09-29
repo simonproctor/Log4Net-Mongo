@@ -39,8 +39,6 @@ namespace MongoAppender.Tests
 
     using NUnit.Framework;
 
-    using SharpTestsEx;
-
     /// <summary>
     /// Integration test fixture for recording and query for log entries in the test mongo 
     /// database.
@@ -66,7 +64,7 @@ namespace MongoAppender.Tests
         static MongoDbAppenderTests()
         {
             XmlElement element = (XmlElement)ConfigurationManager.GetSection("log4net");
-            DOMConfigurator.Configure(element);
+            XmlConfigurator.Configure(element);
         }
 
         /// <summary>
@@ -80,7 +78,7 @@ namespace MongoAppender.Tests
 
             MongoServer conn = client.GetServer();
             MongoDatabase db = conn.GetDatabase("log4net");
-            this.collection = db.GetCollection("logs");
+            collection = db.GetCollection("logs");
         }
 
         /// <summary>
@@ -91,8 +89,8 @@ namespace MongoAppender.Tests
         {
             Log.Info("a log");
 
-            BsonDocument doc = this.collection.FindOneAs<BsonDocument>();
-            doc.GetElement("timestamp").Value.Should().Be.OfType<BsonDateTime>();
+            BsonDocument doc = collection.FindOneAs<BsonDocument>();
+            Assert.IsTrue(doc.GetElement("timestamp").Value is BsonDateTime);
         }
 
         /// <summary>
@@ -110,7 +108,7 @@ namespace MongoAppender.Tests
             SortByBuilder sbb = new SortByBuilder();
             sbb.Descending("_id");
 
-            var allDocs = this.collection.FindAllAs<BsonDocument>().SetSortOrder(sbb).SetLimit(5);
+            var allDocs = collection.FindAllAs<BsonDocument>().SetSortOrder(sbb).SetLimit(5);
 
             BsonDocument doc = allDocs.First();
             Assert.AreEqual(doc.GetElement("message").Value.AsString, "a log 5");
@@ -124,9 +122,9 @@ namespace MongoAppender.Tests
         {
             Log.Info("a log");
 
-            var doc = this.collection.FindOneAs<BsonDocument>();
-            doc.GetElement("level").Value.Should().Be.OfType<BsonString>();
-            doc.GetElement("level").Value.AsString.Should().Be.EqualTo("INFO");
+            var doc = collection.FindOneAs<BsonDocument>();
+            Assert.IsTrue(doc.GetElement("level").Value is BsonString);
+            Assert.AreEqual(doc.GetElement("level").Value.AsString, "INFO");
         }
 
         /// <summary>
@@ -137,9 +135,9 @@ namespace MongoAppender.Tests
         {
             Log.Info("a log");
 
-            BsonDocument doc = this.collection.FindOneAs<BsonDocument>();
-            doc.GetElement("thread").Value.Should().Be.OfType<BsonString>();
-            doc.GetElement("thread").Value.AsString.Should().Be.EqualTo(Thread.CurrentThread.Name);
+            BsonDocument doc = collection.FindOneAs<BsonDocument>();
+            Assert.IsTrue(doc.GetElement("thread").Value is BsonString);
+            Assert.AreEqual(doc.GetElement("thread").Value.AsString, Thread.CurrentThread.Name);
         }
 
         /// <summary>
@@ -160,11 +158,11 @@ namespace MongoAppender.Tests
             SortByBuilder sbb = new SortByBuilder();
             sbb.Descending("_id");
 
-            var allDocs = this.collection.FindAllAs<BsonDocument>().SetSortOrder(sbb).SetLimit(1);
+            var allDocs = collection.FindAllAs<BsonDocument>().SetSortOrder(sbb).SetLimit(1);
             
             BsonDocument doc = allDocs.First();
-            doc.GetElement("exception").Value.Should().Be.OfType<BsonString>();
-            doc.GetElement("exception").Value.AsString.Should().Contain("BOOM");
+            Assert.IsTrue(doc.GetElement("exception").Value is BsonString);
+            Assert.IsTrue(doc.GetElement("exception").Value.AsString.IndexOf("BOOM", StringComparison.Ordinal) > -1);
         }
     }
 }
